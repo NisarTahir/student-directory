@@ -1,15 +1,15 @@
 
 #Lets put the students into an array
 
-students = {}
-students = [
-  {:name => 'Michael', :cohort => :november},
-  {:name => 'Jack',  :cohort => :november},
-  {:name => 'Jeremy', :cohort => :november},
-  {:name => 'Bruce', :cohort => :november},
-  {:name => 'Nisar', :cohort => :november},
-  {:name => 'James', :cohort => :november}
-]
+#students = {}
+#students = [
+  #{:name => 'Michael', :cohort => :november},
+  #{:name => 'Jack',  :cohort => :november},
+#  {:name => 'Jeremy', :cohort => :november},
+#  {:name => 'Bruce', :cohort => :november},
+ # {:name => 'Nisar', :cohort => :november},
+  #{:name => 'James', :cohort => :november}
+#]
 
 def print_header
 	puts "The students of my cohort at Makers Academy"
@@ -28,20 +28,24 @@ def print_footer(names)
 	puts "Overall, we have #{names.length} great students"
 end
 
-puts "Enter a student name and then press ENTER\nWhen you have finished type END and press ENTER"
+def get_students
 
-student_names =[]
+  puts "Enter a student name and then press ENTER\nWhen you have finished, press ENTER twice"
 
-until student_names.last == "END"
-  student_names << gets.chomp
+  student_names = []
+
+  name = gets.chomp
+
+  while !name.empty? do
+    student_names << {:name => name, :cohort => :november}
+    name = gets.chomp 
+  end
+
+  return student_names
 end
 
+student_names = get_students
+
 print_header
-student_names.pop
-puts student_names
+print_students(student_names)
 print_footer(student_names)
-
-
-#print_header
-#print_students(students)
-#print_footer(students)
