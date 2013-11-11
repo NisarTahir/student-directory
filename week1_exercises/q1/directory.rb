@@ -1,16 +1,6 @@
 
 #Q1 replace all puts with print and ad a \n for a new line
 
-#students = {}
-#students = [
-  #{:name => 'Michael', :cohort => :november},
-  #{:name => 'Jack',  :cohort => :november},
-#  {:name => 'Jeremy', :cohort => :november},
-#  {:name => 'Bruce', :cohort => :november},
- # {:name => 'Nisar', :cohort => :november},
-  #{:name => 'James', :cohort => :november}
-#]
-
 def print_header
 	print "The students of my cohort at Makers Academy\n"
 	print "-------------------------------------------\n"
