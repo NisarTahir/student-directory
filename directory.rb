@@ -1,4 +1,4 @@
-#Added a comment
+#Added a comment line
 puts "The students of my cohort at Makers Academy"
 puts "-------------------------------------------"
 puts "Michael"
