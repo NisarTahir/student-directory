@@ -1,5 +1,5 @@
 
-#Q1 replace all puts with print and ad a \n for a new line
+#Rewritten the each method in print_students to while instead
 
 #students = {}
 #students = [
@@ -12,25 +12,28 @@
 #]
 
 def print_header
-	print "The students of my cohort at Makers Academy\n"
-	print "-------------------------------------------\n"
+	puts "The students of my cohort at Makers Academy"
+	puts "-------------------------------------------"
 end
 
-def print_students(names)
+def print_students(student)
 	#now we print a list of the students
-	names.each do |student|
-		print "#{student[:name]} is part of the #{student[:cohort]} cohort\n"
-	end
+ x = student.length
+  
+ while x > 0
+  	x = x - 1
+    puts "#{student[x]}"#" is part of the #{student[:cohort]} cohort"
+  end
 end
 
 def print_footer(names)
 	#finally, we print the total
-	print "Overall, we have #{names.length} great students\n"
+	puts "Overall, we have #{names.length} great students"
 end
 
 def get_students
 
-  print "Enter a student name and then press ENTER\nWhen you have finished, press ENTER twice\n"
+  puts "Enter a student name and then press ENTER\nWhen you have finished, press ENTER twice"
 
   student_names = []
 
@@ -47,5 +50,6 @@ end
 student_names = get_students
 
 print_header
+#p student_names.inspect
 print_students(student_names)
 print_footer(student_names)

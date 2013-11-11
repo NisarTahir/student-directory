@@ -1,5 +1,5 @@
 
-#Q1 replace all puts with print and ad a \n for a new line
+#Q3 and Q4 - Print names that start with the letter A and also print people who have less than 6 characters in their name
 
 #students = {}
 #students = [
@@ -12,25 +12,29 @@
 #]
 
 def print_header
-	print "The students of my cohort at Makers Academy\n"
-	print "-------------------------------------------\n"
+	puts "The students of my cohort at Makers Academy"
+	puts "-------------------------------------------"
 end
 
 def print_students(names)
 	#now we print a list of the students
 	names.each do |student|
-		print "#{student[:name]} is part of the #{student[:cohort]} cohort\n"
-	end
+    if student[:name].capitalize[0,1] == "A"
+		  puts "#{student[:name]} is part of the #{student[:cohort]} cohort and their name begins with the letter A"
+    elsif student[:name].to_i < 6
+      puts "#{student[:name]} is part of the #{student[:cohort]} cohort and their name length is less then 6"
+    end
+  end
 end
 
 def print_footer(names)
 	#finally, we print the total
-	print "Overall, we have #{names.length} great students\n"
+	puts "Overall, we have #{names.length} great student(s)"
 end
 
 def get_students
 
-  print "Enter a student name and then press ENTER\nWhen you have finished, press ENTER twice\n"
+  puts "Enter a student name and then press ENTER\nWhen you have finished, press ENTER twice"
 
   student_names = []
 
