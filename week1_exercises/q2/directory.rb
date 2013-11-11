@@ -1,16 +1,6 @@
 
 #Add X = 0 and then x = x + 1 to print a number then the name
 
-#students = {}
-#students = [
-  #{:name => 'Michael', :cohort => :november},
-  #{:name => 'Jack',  :cohort => :november},
-#  {:name => 'Jeremy', :cohort => :november},
-#  {:name => 'Bruce', :cohort => :november},
- # {:name => 'Nisar', :cohort => :november},
-  #{:name => 'James', :cohort => :november}
-#]
-
 def print_header
 	puts "The students of my cohort at Makers Academy"
 	puts "-------------------------------------------"

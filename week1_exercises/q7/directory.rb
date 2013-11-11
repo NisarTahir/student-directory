@@ -1,5 +1,4 @@
 
-#Lets put the students into an array
 @line_width = 50
 
 def print_header

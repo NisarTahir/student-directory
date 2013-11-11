@@ -1,16 +1,6 @@
 
 #Rewritten the each method in print_students to while instead
 
-#students = {}
-#students = [
-  #{:name => 'Michael', :cohort => :november},
-  #{:name => 'Jack',  :cohort => :november},
-#  {:name => 'Jeremy', :cohort => :november},
-#  {:name => 'Bruce', :cohort => :november},
- # {:name => 'Nisar', :cohort => :november},
-  #{:name => 'James', :cohort => :november}
-#]
-
 def print_header
 	puts "The students of my cohort at Makers Academy"
 	puts "-------------------------------------------"
