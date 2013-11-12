@@ -33,6 +33,10 @@ def input_students
 end
 
 students = input_students
-print_header
-print_students(students)
-print_footer(students)
+if students.count > 0
+  print_header
+  print_students(students)
+  print_footer(students)
+else
+  puts "You didn't enter any students"
+end
