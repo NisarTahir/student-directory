@@ -1,20 +1,41 @@
 require 'date'
 
+def interactive_menu
+  #students =[]
+  loop do
+    puts "1. Enter student details"
+    puts "2. Show the student details"
+    puts "9. Exit the application"
+
+    selection = gets.chomp
+    case selection
+      when "1"
+        @students_details = get_students_details
+      when "2"
+        print_header
+        print_students(@students_details)
+        print_footer(@students_details)
+      when "9"
+        exit
+      else
+        puts "Please enter a valid response"
+    end
+  end
+end
+
+
 def print_header
 	system("clear")
   puts "======================================================================"
-  puts "|Welcome to the Student Directory application, press ENTER to continue|"
+  puts "|                 Student Directory list application                 |" 
   puts "======================================================================"
 end
 
 def print_students(names)
-	#now we print a list of the students
-	system("clear")
-	
   cohorts =  names.sort_by {|student| student[:cohort]}
 
   cohorts.each do |student|
-    puts "#{student[:name]} is part of the #{student[:cohort]} cohort and from #{student[:country]}"
+    puts "Student #{student[:name]} is part of the #{student[:cohort]} cohort and from #{student[:country]}"
   end
 end 
 
@@ -23,9 +44,9 @@ def print_footer(names)
   if names.count == 0
 	 puts "We have no students"
   elsif names.count == 1
-    puts "Overall, we have #{names.length} great student"
+    puts "Overall, we have #{names.length} great student\n\n"
   else
-    puts "Overall, we have #{names.length} great students"
+    puts "Overall, we have #{names.length} great students\n\n"
   end
 end
 
@@ -42,7 +63,7 @@ def get_students_details
 
   student_details = []
 
-  user_response = gets.chomp
+  user_response = nil
 
   while user_response != "FIN"
     
@@ -87,11 +108,13 @@ def get_students_details
 
 	end
 
-	return student_details
+	student_details
 end
 
-print_header
-students_details = get_students_details
-print_students(students_details)
-print_footer(students_details)
+interactive_menu
+
+#print_header
+#students_details = get_students_detail#
+#print_students(students_details)
+#print_footer(students_details)
 
