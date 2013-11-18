@@ -1,20 +1,27 @@
 require 'date'
 
+def print_menu
+  puts "1. Enter student details"
+  puts "2. Show the student details"
+  puts "9. Exit the application"
+end
+
+def show_students
+  print_header
+  print_students(@students_details)
+  print_footer(@students_details)
+end
+
 def interactive_menu
   #students =[]
   loop do
-    puts "1. Enter student details"
-    puts "2. Show the student details"
-    puts "9. Exit the application"
-
+    print_menu
     selection = gets.chomp
     case selection
       when "1"
         @students_details = get_students_details
       when "2"
-        print_header
-        print_students(@students_details)
-        print_footer(@students_details)
+        show_students
       when "9"
         exit
       else

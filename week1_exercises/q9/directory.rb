@@ -42,7 +42,7 @@ def get_students_details
 
   student_details = []
 
-  user_response = gets.chomp
+  user_response = gets.strip
 
   while user_response != "FIN"
     
@@ -52,12 +52,12 @@ def get_students_details
 
     while is_string(name) == ""
       puts "Enter a student's name and then press ENTER\n"
-      name = gets.chomp
+      name = gets.strip
     end
 
     while is_string(country) == "" 
       puts "Enter a student's country and then press ENTER\n"
-      country = gets.chomp
+      country = gets.strip
 
       if country.empty?
         country = "UK"
@@ -66,7 +66,7 @@ def get_students_details
 
     while is_string(cohort) == ""
       puts "Enter student's cohort, i.e. month and then press ENTER\n"
-      cohort = gets.chomp
+      cohort = gets.strip
 
       if cohort.empty?
         cohort = Date.today.strftime("%B") # <== This gives the current month name
@@ -79,7 +79,7 @@ def get_students_details
 
     puts "When you have finished, [type FIN and press ENTER] or [just press ENTER to continue]"
 
-	  user_response = gets.chomp
+	  user_response = gets.strip
 
 	  if user_response == "FIN"
 	  	break

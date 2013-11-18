@@ -27,8 +27,12 @@ def print_footer(names)
 end
 
 def is_string(input)
- result = /\A[A-Za-z]+\Z/.match(input)
- return result.to_s
+  # \ regex |
+  # \A \Z will search the entire line
+  # \[A-Za-z] will search for letters only
+  # + will look for all letters in the line
+  result = /\A[A-Za-z]+\Z/.match(input)
+  return result.to_s
 end
 
 def get_students_details

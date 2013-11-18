@@ -9,9 +9,9 @@ end
 def print_students(names)
   x = 0
   #now we print a list of the students
-	names.each do |student|
-		x = x + 1
-    puts "#{x} #{student[:name]} is part of the #{student[:cohort]} cohort"
+	names.each_with_index do |student, index|
+		#x = x + 1
+    puts "#{index} #{student[:name]} is part of the #{student[:cohort]} cohort"
 	end
 end
 
