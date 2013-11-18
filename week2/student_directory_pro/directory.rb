@@ -1,9 +1,12 @@
 require 'date'
 
+@student_details = []
+
 def print_menu
   puts "1. Enter student details"
   puts "2. Show the student details"
   puts "3. Save students to students.csv"
+  puts "4. Load students from students.csv"
   puts "9. Exit the application"
 end
 
@@ -21,6 +24,8 @@ def process_menu(selection)
       show_students
     when "3"
       save_students
+    when "4"
+      load_students
     when "9"
       exit
     else
@@ -73,8 +78,6 @@ end
 
 def get_students_details
 
-  student_details = []
-
   user_response = nil
 
   while user_response != "FIN"
@@ -107,7 +110,7 @@ def get_students_details
     end
 
     if !name.empty? || !country.empty?
-      student_details << {:name => name, :country => country, :cohort => cohort.to_sym}
+      @student_details << {:name => name, :country => country, :cohort => cohort.to_sym}
     end
 
     puts "When you have finished, [type FIN and press ENTER] or [just press ENTER to continue]"
@@ -118,7 +121,7 @@ def get_students_details
 	  	break
 	  end
 	end
-	student_details
+	@student_details
 end
 
 def save_students
@@ -130,6 +133,15 @@ def save_students
   end
   file.close
   puts "The data has been saved to students.csv"
+end
+
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, country, cohort = line.chomp.split(',') # Parallel assignment, i.e. [Nisar,UK,May] will be name will be Nisar - country will be UK and cohort will be May
+    @students_details << {:name => name, :country => country, :cohort => cohort.to_sym}
+  end
+  file.close
 end
 
 interactive_menu
