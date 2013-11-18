@@ -1,6 +1,6 @@
 require 'date'
 
-@student_details = []
+@students_details = []
 
 def print_menu
   puts "1. Enter student details"
@@ -36,7 +36,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process_menu(gets.chomp)
+    process_menu(STDIN.gets.chomp)
   end
 end
 
@@ -67,12 +67,12 @@ def print_footer(names)
   end
 end
 
-def is_string(input)
+def is_valid_input(value)
   # \ regex |
   # \A \Z will search the entire line
   # \[A-Za-z] will search for letters only
   # + will look for all letters in the line
-  result = /\A[A-Za-z]+\Z/.match(input)
+  result = /\A[A-Za-z]+\Z/.match(value)
   return result.to_s
 end
 
@@ -81,47 +81,39 @@ def get_students_details
   user_response = nil
 
   while user_response != "FIN"
-    
-    name = nil
-    country = nil
-    cohort = nil
 
-    while is_string(name) == ""
-      puts "Enter a student's name and then press ENTER\n"
-      name = gets.chomp
-    end
-
-    while is_string(country) == "" 
-      puts "Enter a student's country and then press ENTER\n"
-      country = gets.chomp
-
-      if country.empty?
-        country = "UK"
-      end 
-    end
-
-    while is_string(cohort) == ""
-      puts "Enter student's cohort, i.e. month and then press ENTER\n"
-      cohort = gets.chomp
-
-      if cohort.empty?
-        cohort = Date.today.strftime("%B") # <== This gives the current month name
-      end
-    end
+    name = get_valid_input("a student's name")
+    country = get_valid_input("a student's country","UK")
+    cohort = get_valid_input("student's cohort, i.e. month")
 
     if !name.empty? || !country.empty?
-      @student_details << {:name => name, :country => country, :cohort => cohort.to_sym}
+      @students_details << {:name => name, :country => country, :cohort => cohort.to_sym}
     end
 
     puts "When you have finished, [type FIN and press ENTER] or [just press ENTER to continue]"
 
-	  user_response = gets.chomp
+	  user_response = STDIN.gets.chomp
 
 	  if user_response == "FIN"
 	  	break
 	  end
 	end
-	@student_details
+	@students_details
+end
+
+def get_valid_input(message, default="")
+  value = nil
+  while is_valid_input(value) == "" 
+    puts "Enter #{message} and then press ENTER\n"
+    value = STDIN.gets.chomp
+
+    if value.empty? && message == "student's cohort, i.e. month"
+      value = Date.today.strftime("%B") # <== This gives the current month name
+    elsif value.empty? && message == "a student's country"
+      value = "UK"
+    end 
+  end
+  return value
 end
 
 def save_students
@@ -135,13 +127,28 @@ def save_students
   puts "The data has been saved to students.csv"
 end
 
-def load_students
+def load_students(filename = "students.csv")
   file = File.open("students.csv", "r")
   file.readlines.each do |line|
+    #puts "students_details: #{@students_details.class}"
     name, country, cohort = line.chomp.split(',') # Parallel assignment, i.e. [Nisar,UK,May] will be name will be Nisar - country will be UK and cohort will be May
     @students_details << {:name => name, :country => country, :cohort => cohort.to_sym}
   end
   file.close
 end
+
+def try_loading_students
+  command_line_filename = ARGV.first
+
+  return if command_line_filename.nil?
+  if File.exists?(command_line_filename)
+    load_students(command_line_filename)
+  else 
+    puts "File #{command_line_filename} does not exist"
+  end
+end
+
+try_loading_students
+show_students
 
 interactive_menu
