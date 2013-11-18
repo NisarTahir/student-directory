@@ -3,6 +3,7 @@ require 'date'
 def print_menu
   puts "1. Enter student details"
   puts "2. Show the student details"
+  puts "3. Save students to students.csv"
   puts "9. Exit the application"
 end
 
@@ -18,6 +19,8 @@ def process_menu(selection)
       @students_details = get_students_details
     when "2"
       show_students
+    when "3"
+      save_students
     when "9"
       exit
     else
@@ -114,10 +117,19 @@ def get_students_details
 	  if user_response == "FIN"
 	  	break
 	  end
-
 	end
-
 	student_details
+end
+
+def save_students
+  file = File.open("students.csv", "w")
+  @students_details.each do |student|
+    student_data = [student[:name], student[:country], student[:cohort]]
+    csv_line = student_data.join(",") #<-- This will create a line of text each word in that line will be separated by a comma
+    file.puts csv_line
+  end
+  file.close
+  puts "The data has been saved to students.csv"
 end
 
 interactive_menu
