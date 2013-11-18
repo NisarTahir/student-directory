@@ -12,21 +12,23 @@ def show_students
   print_footer(@students_details)
 end
 
+def process_menu(selection)
+  case selection
+    when "1"
+      @students_details = get_students_details
+    when "2"
+      show_students
+    when "9"
+      exit
+    else
+      puts "Please enter a valid response"
+  end
+end
+
 def interactive_menu
-  #students =[]
   loop do
     print_menu
-    selection = gets.chomp
-    case selection
-      when "1"
-        @students_details = get_students_details
-      when "2"
-        show_students
-      when "9"
-        exit
-      else
-        puts "Please enter a valid response"
-    end
+    process_menu(gets.chomp)
   end
 end
 
@@ -119,9 +121,3 @@ def get_students_details
 end
 
 interactive_menu
-
-#print_header
-#students_details = get_students_detail#
-#print_students(students_details)
-#print_footer(students_details)
-
